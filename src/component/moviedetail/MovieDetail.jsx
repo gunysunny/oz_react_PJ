@@ -23,6 +23,7 @@ function MovieDetail() {
     if (!movie) return <div className="text-center py-10">Loading...</div>;
 
     // 배경 이미지 URL 생성: backdrop_path 우선, 없으면 포스터 이미지 사용
+    // 삼항 연산자 사용 ?참일경우 값 :참이 아닐경우 값값
     const bgImgUrl = movie.backdrop_path
         ? `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
         : `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
