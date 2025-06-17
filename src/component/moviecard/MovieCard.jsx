@@ -15,7 +15,7 @@ function MovieCard({ title, poster_path, vote_average }) {
                 // w-full: 부모div 기준 가로 100%, h-80: 고정 높이, object-cover: 비율 유지, rounded: 모서리 라운드, mb-3: 아래 마진
             />
             {/* 영화 제목 */}
-            <h3 className="text-lg font-semibold mb-1 text-center">{title}</h3>
+            <h3 className="text-base font-semibold mb-1 text-center">{title}</h3>
             {/* 영화 평점 */}
             <span className="text-gray-500 font-semibold text-sm">
                 평점: {vote_average}
