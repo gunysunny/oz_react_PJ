@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function MovieCard({ title, poster_path, vote_average }) {
+function MovieCard({ title, poster_path, vote_average }) {
     return (
         <div className="bg-white shadow rounded-lg p-4 w-60 flex flex-col items-start hover:scale-105 transition cursor-pointer">
         <img
@@ -15,3 +15,4 @@ export default function MovieCard({ title, poster_path, vote_average }) {
         </div>
     );
 }
+export default MovieCard;
