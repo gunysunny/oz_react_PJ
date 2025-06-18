@@ -5,6 +5,10 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    fontFamily: {
+    sans: ['Inter', 'Pretendard', 'sans-serif'],
+    netflix: ['Montserrat', 'Pretendard', 'sans-serif'],
+    },
   },
   plugins: [],
 }
