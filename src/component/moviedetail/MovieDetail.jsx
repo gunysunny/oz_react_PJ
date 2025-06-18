@@ -44,7 +44,7 @@ function MovieDetail() {
             <div className="absolute inset-0 bg-black opacity-60 z-0" />
 
             {/* 실제 컨텐츠(상대적 z-index 10, 포스터+상세정보 flex 정렬) */}
-            <div className="relative z-10 max-w-4xl mx-auto py-16 flex flex-col md:flex-row items-center gap-8">
+            <div className="relative z-10 max-w-4xl mx-auto px-10 py-[90px] flex flex-col md:flex-row items-center gap-8">
                 {/* 영화 포스터 이미지 */}
                 <img
                     src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
