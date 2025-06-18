@@ -75,38 +75,54 @@ function MovieCylinder({ movies }) {
                 }}
             >
                 {/* 각 영화 카드를 원통 표면에 나란히 배치 */}
-                {visible.map((movie, i) => (
-                    <div
-                        key={movie.id + "-cylinder-" + i}
-                        style={{
-                            position: "absolute",
-                            left: 0,
-                            top: "50%",
-                            width: CARD_WIDTH,
-                            // 카드별로 rotateY, translateZ, translateY 조합 → 원통 표면 배치
-                            transform: `
-                                rotateY(${degForIndex(i, total)}deg)
-                                translateZ(${radius}px)
-                                translateY(-50%)
-                            `,
-                            transition: "transform 0.7s cubic-bezier(.4,0,.2,1)",
-                            cursor: "pointer",
-                        }}
-                        // 카드 클릭 시 해당 영화 상세페이지로 이동
-                        onClick={() => navigate(`/detail/${movie.id}`)}
-                    >
-                        {/* 영화 정보 전달해서 카드 렌더링 */}
-                        <MovieCard
-                            title={movie.title}
-                            poster_path={
-                                movie.poster_path
-                                    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-                                    : "https://placehold.co/300x450?text=No+Image"
-                            }
-                            vote_average={movie.vote_average}
-                        />
-                    </div>
-                ))}
+                {visible.map((movie, i) => {
+        // 정면 카드(index), 바로 옆(좌우), 그 외
+        let opacity = 0.25; // 기본(멀리 있는 카드)
+        let filter = "blur(2px)";
+        if (i === index) {
+            opacity = 1;
+            filter = "none";
+        } else if (
+            i === (index - 1 + total) % total ||
+            i === (index + 1) % total
+        ) {
+            opacity = 0.65;
+            filter = "none";
+        }
+
+        return (
+            <div
+                key={movie.id + "-cylinder-" + i}
+                style={{
+                    position: "absolute",
+                    left: 0,
+                    top: "50%",
+                    width: CARD_WIDTH,
+                    transform: `
+                        rotateY(${degForIndex(i, total)}deg)
+                        translateZ(${radius}px)
+                        translateY(-50%)
+                    `,
+                    transition: "transform 0.7s cubic-bezier(.4,0,.2,1), opacity 0.5s, filter 0.5s",
+                    cursor: "pointer",
+                    opacity,
+                    filter,
+                    zIndex: i === index ? 2 : 1, // 정면 카드가 위로 보이게
+                }}
+                onClick={() => navigate(`/detail/${movie.id}`)}
+            >
+                <MovieCard
+                    title={movie.title}
+                    poster_path={
+                        movie.poster_path
+                            ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                            : "https://placehold.co/300x450?text=No+Image"
+                    }
+                    vote_average={movie.vote_average}
+                />
+            </div>
+        );
+    })}
             </div>
         </div>
     );
