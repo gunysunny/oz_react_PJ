@@ -2,7 +2,7 @@ import React from "react";
 
 function NavBar() {
     return (
-        <nav className="w-full bg-gray-900 text-white py-4 px-8 shadow fixed ">
+        <nav className="w-full bg-gray-900 text-white py-4 px-8 shadow fixed z-50">
             <div className="max-w-5xl mx-auto flex items-center justify-between">
                 {/* 왼쪽: 로고 */}
                 <span className="text-2xl font-bold">🎬 MovieSite</span>
