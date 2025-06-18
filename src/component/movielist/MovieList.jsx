@@ -20,7 +20,7 @@ function MovieList() {
 
     return (
         // 전체 페이지 레이아웃(최소 높이/배경/상단 여백)
-        <div className="min-h-screen bg-gray-100 py-[90px]">
+        <div className=" min-h-screen py-[90px] bg-gradient-to-br from-gray-900 via-gray-800 to-[#232f3e] text-white">
             {/* 페이지 제목 */}
             <h1 className="text-3xl font-bold text-center mb-16">🎬 인기 영화 모음</h1>
             {/* 1. 원통형 3D 캐러셀(슬라이드) 뷰 */}
