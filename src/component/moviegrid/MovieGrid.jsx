@@ -11,7 +11,7 @@ function MovieGrid({ movies }) {
     return (
         <div>
             {/* 섹션 제목 */}
-            <h2 className="text-2xl font-bold mb-4 mt-12 text-center">카드 그리드 보기</h2>
+            <h2 className="text-2xl font-bold mb-4 mt-12 text-center">인기 추천 영화</h2>
             {/* 카드들을 flex-wrap으로 여러 줄 나열 */}
             <div className="flex flex-wrap justify-center gap-6">
                 {movies.map((movie) => (
