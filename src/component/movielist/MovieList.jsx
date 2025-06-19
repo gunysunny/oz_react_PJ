@@ -11,12 +11,27 @@ function MovieList() {
     const [movieList, setMovieList] = useState([]);
 
     // 컴포넌트 마운트 시 한 번 실행(빈 배열: 최초 1회만 실행)
-    useEffect(() => {
-        // public 폴더의 movieListData.json 더미 데이터 요청
-        fetch("/movieListData.json")
-            .then((res) => res.json())           // 응답을 JSON으로 변환
-            .then((data) => setMovieList(data.results)); // 결과 배열만 상태로 저장
-    }, []);
+        useEffect(() => {
+            const API_TOKEN = import.meta.env.VITE_TMDB_TOKEN; // .env에 v4 토큰 저장
+            const API_URL = "https://api.themoviedb.org/3/movie/popular?language=ko-KR&page=1";
+
+            fetch(API_URL, {
+            method: "GET",
+            headers: {
+                accept: "application/json", // 응답 타입 지정
+                Authorization: `Bearer ${API_TOKEN}` // .env에 저장한 v4 토큰 사용
+            }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    // adult: false인 영화만 필터링해서 저장
+                    const filtered = data.results.filter(movie => movie.adult === false);
+                    setMovieList(filtered);
+                })
+                .catch(error => {
+                    console.error("영화 데이터 가져오기 실패:", error);
+                });
+        }, []);
 
     return (
         // 전체 페이지 레이아웃(최소 높이/배경/상단 여백)
