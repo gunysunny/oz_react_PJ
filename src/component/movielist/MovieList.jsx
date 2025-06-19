@@ -18,11 +18,12 @@ function MovieList() {
 
     // loader: 페이지 맨 아래에 붙여서, 화면에 보이면 다음 페이지 불러오도록 감지할 DOM 요소(Ref)
     const loader = useRef(null);
+    const TMDB_MOVIE_BASE_URL = "https://api.themoviedb.org/3/movie";
 
     // ⭐ 첫 1페이지 데이터: 캐러셀+그리드용으로 최초 1회만 가져옴
     useEffect(() => {
         const API_TOKEN = import.meta.env.VITE_TMDB_TOKEN; // 환경변수에서 TMDb v4 토큰 읽음
-        fetch(`https://api.themoviedb.org/3/movie/popular?language=ko-KR&page=1`, {
+        fetch(`${TMDB_MOVIE_BASE_URL}/popular?language=ko-KR&page=1`, {
             headers: {
                 accept: "application/json",
                 Authorization: `Bearer ${API_TOKEN}` // 인증
@@ -42,7 +43,7 @@ function MovieList() {
         if (page === 1) return; // 첫 페이지는 위에서 이미 가져옴(중복 요청 방지)
         const API_TOKEN = import.meta.env.VITE_TMDB_TOKEN;
         setLoading(true); // 로딩중 표시 ON
-        fetch(`https://api.themoviedb.org/3/movie/popular?language=ko-KR&page=${page}`, {
+        fetch(`${TMDB_MOVIE_BASE_URL}/popular?language=ko-KR&page=${page}`, {
             headers: {
                 accept: "application/json",
                 Authorization: `Bearer ${API_TOKEN}`
