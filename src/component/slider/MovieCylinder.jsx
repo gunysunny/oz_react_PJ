@@ -65,7 +65,7 @@ function MovieCylinder({ movies }) {
     return (
         // 원통 전체 컨테이너(가로/세로 중앙정렬, 원근감, overflow:hidden)
         <div
-            className="flex items-center justify-center w-full py-20"
+            className="flex items-center justify-center w-full pb-[150px]"
             ref={containerRef}
             // style={{
             //     height: 825,
