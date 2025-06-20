@@ -14,10 +14,22 @@ function MovieDetail() {
 
     // 컴포넌트 마운트 시 한 번 실행: 상세 데이터 fetch
     useEffect(() => {
-        fetch("/movieDetailData.json")           // public 폴더 내 더미 상세 데이터 요청
-            .then((res) => res.json())           // 응답을 JSON으로 파싱
-            .then((data) => setMovie(data));     // 파싱된 데이터로 movie 상태 업데이트
-    }, []);
+        const API_TOKEN = import.meta.env.VITE_TMDB_TOKEN; // .env의 v4 토큰
+        const API_URL = `https://api.themoviedb.org/3/movie/${id}?language=ko-KR`;
+
+        fetch(API_URL, {
+            headers: {
+                accept: "application/json",
+                Authorization: `Bearer ${API_TOKEN}`,
+            }
+        })
+            .then(res => res.json())
+            .then(data => setMovie(data))
+            .catch(err => {
+                console.error("영화 상세 정보 불러오기 실패:", err);
+                setMovie(null);
+            });
+    }, [id]);
 
     // movie 데이터가 아직 없으면 로딩 메시지 출력
     if (!movie) return <div className="text-center py-10">Loading...</div>;
