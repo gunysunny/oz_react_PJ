@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Search, Menu } from "lucide-react";
 import useDebounce from "../../hooks/useDebounce"; // 커스텀 훅 import
+import { useNavigate } from "react-router-dom";
 
 function NavBar({ onSearch }) {
     const [scrolled, setScrolled] = useState(false);
@@ -8,6 +9,7 @@ function NavBar({ onSearch }) {
     const [showMenu, setShowMenu] = useState(false);
     const [query, setQuery] = useState("");                // 검색어 입력 상태
     const menuRef = useRef(null);
+    const navigate = useNavigate(); // ★★★ 함수 맨 위에 선언!
 
     // 1. 디바운스된 검색어
     const debouncedQuery = useDebounce(query, 1000); // 600ms 등 자유롭게 조정
@@ -102,11 +104,17 @@ function NavBar({ onSearch }) {
                             ref={menuRef}
                             className="absolute right-0 top-12 bg-gray-800 bg-opacity-95 rounded shadow-lg py-2 w-36 flex flex-col animate-fade-in z-50"
                         >
-                            <button className="py-2 px-4 hover:bg-gray-700 text-left text-white">
-                                로그인
+                            <button
+                            className="py-2 px-4 hover:bg-gray-700 text-left text-white"
+                            onClick={() => navigate("/login")}
+                            >
+                            로그인
                             </button>
-                            <button className="py-2 px-4 hover:bg-gray-700 text-left text-white">
-                                회원가입
+                            <button
+                            className="py-2 px-4 hover:bg-gray-700 text-left text-white"
+                            onClick={() => navigate("/signup")}
+                            >
+                            회원가입
                             </button>
                         </div>
                     )}
