@@ -39,9 +39,15 @@ function Login() {
     }, []);
 
     const handleChange = e => {
-        setFields(f => ({ ...f, [e.target.name]: e.target.value }));
-        setErrors(e => ({ ...e, [e.target.name]: "" }));
-        setSubmitError(""); // 에러 리셋
+    // 방어코드 추가
+        const { name, value } = e.target || {};
+        if (!name) {
+            console.error('handleChange: name 속성이 없는 이벤트입니다.', e.target);
+            return;
+        }
+        setFields(f => ({ ...f, [name]: value }));
+        setErrors(e => ({ ...e, [name]: '' }));
+        setSubmitError('');
     };
 
     // ⭐⭐⭐ 실제 로그인!
