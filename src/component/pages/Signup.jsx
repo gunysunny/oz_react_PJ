@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import InputField from "../InputField";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../supabase/auth/useAuth";
+import useDebounce from "../../hooks/useDebounce";
 
 const validate = {
     name: v => !/^[a-zA-Z0-9가-힣]{2,8}$/.test(v) ? "이름은 2~8자, 숫자/한글/영어만 사용!" : "",
@@ -15,9 +16,16 @@ function Signup() {
     const [fields, setFields] = useState({ name: "", email: "", password: "", passwordCheck: "" });
     const [errors, setErrors] = useState({});
     const [bgUrl, setBgUrl] = useState("");
+    const debouncedName = useDebounce(fields.name, 500);
     const [serverError, setServerError] = useState("");
     const navigate = useNavigate();
     const { signUp } = useAuth(); // ⭐️ Supabase 회원가입 함수 가져오기
+
+    useEffect(() => {
+        if (fields.name === debouncedName) {
+        setErrors(e => ({ ...e, name: validate.name(debouncedName) }));
+        }
+    }, [debouncedName]);
 
     // 영화 백드롭 배경
     useEffect(() => {
@@ -39,9 +47,15 @@ function Signup() {
 
     // 입력 핸들러
     const handleChange = e => {
-        setFields(f => ({ ...f, [e.target.name]: e.target.value }));
-        setErrors(e => ({ ...e, [e.target.name]: "" }));
-        setServerError(""); // 서버에러 초기화
+    // 방어코드 추가
+        const { name, value } = e.target || {};
+        if (!name) {
+            console.error('handleChange: name 속성이 없는 이벤트입니다.', e.target);
+            return;
+        }
+        setFields(f => ({ ...f, [name]: value }));
+        setErrors(e => ({ ...e, [name]: '' }));
+        setSubmitError('');
     };
 
     // 제출 핸들러
