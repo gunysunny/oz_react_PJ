@@ -14,7 +14,7 @@ function InputField({ label, type = "text", value, onChange, error, name, placeh
                 value={value}
                 onChange={onChange}
                 placeholder={placeholder}
-                 className={`
+                className={`
                     w-full px-4 py-2 rounded-xl bg-[#23242a] text-white
                     border border-transparent focus:border-[#319d87] outline-none
                     transition-all duration-300 shadow-sm
