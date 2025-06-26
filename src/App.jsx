@@ -8,6 +8,8 @@ import MovieList from "./component/movielist/MovieList";
 // 영화 상세 페이지 컴포넌트 import
 import MovieDetail from "./component/moviedetail/MovieDetail";
 import Layout from "./component/layout/Layout";
+import Signup from "./component/pages/Signup";
+import Login from "./component/pages/Login";
 
 // App 컴포넌트: 전체 애플리케이션의 라우팅 구조를 담당
 function App() {
@@ -24,6 +26,10 @@ function App() {
       {/* path="detail/:id" : /detail/123 같은 상세 페이지 - :id는 동적 파라미터(영화 고유 id) - MovieDetail 컴포넌트가 Layout의 <Outlet>에 렌더링됨 */}
       <Route path="detail/:id" element={<MovieDetail />} />
     </Route>
+
+    <Route path="/signup" element={<Signup />} />
+    <Route path="/login" element={<Login />} />
+
   </Routes>
 </BrowserRouter>
   );
