@@ -28,45 +28,42 @@ React와 TailwindCSS를 활용해 제작 중인 영화 리스트 사이트입니
 - useEffect를 활용한 슬라이드(캐러셀) 애니메이션 효과
 - (향후) 상세 페이지, 검색, 필터, 즐겨찾기 등 추가 예정
 
----
-
-## 📂 프로젝트 구조
-
+```plaintext
 OZ_REACT_PJ/
 ├─ public/
-│  ├─ movieDetailData.json
-│  ├─ movieListData.json
-│  └─ vite.svg
+│ ├─ movieDetailData.json
+│ ├─ movieListData.json
+│ └─ vite.svg
 ├─ src/
-│  ├─ assets/
-│  ├─ component/
-│  │   ├─ layout/
-│  │   │   └─ Layout.jsx
-│  │   ├─ moviecard/
-│  │   │   └─ MovieCard.jsx
-│  │   ├─ moviedetail/
-│  │   │   └─ MovieDetail.jsx
-│  │   ├─ moviegrid/
-│  │   │   └─ MovieGrid.jsx
-│  │   ├─ movielist/
-│  │   │   └─ MovieList.jsx
-│  │   ├─ navbar/
-│  │   │   └─ NavBar.jsx
-│  │   ├─ pages/
-│  │   │   ├─ Login.jsx
-│  │   │   ├─ Signup.jsx
-│  │   │   └─ MovieCylinder.jsx
-│  │   ├─ slider/
-│  │   │   └─ MovieCylinder.jsx
-│  │   ├─ inputfield.jsx
-│  ├─ hooks/
-│  │   └─ useDebounce.jsx
-│  ├─ App.jsx
-│  ├─ App.css
-│  ├─ index.js
-│  ├─ index.css
-│  ├─ main.jsx
-│  └─ supabase/
+│ ├─ assets/
+│ ├─ component/
+│ │ ├─ layout/
+│ │ │ └─ Layout.jsx
+│ │ ├─ moviecard/
+│ │ │ └─ MovieCard.jsx
+│ │ ├─ moviedetail/
+│ │ │ └─ MovieDetail.jsx
+│ │ ├─ moviegrid/
+│ │ │ └─ MovieGrid.jsx
+│ │ ├─ movielist/
+│ │ │ └─ MovieList.jsx
+│ │ ├─ navbar/
+│ │ │ └─ NavBar.jsx
+│ │ ├─ pages/
+│ │ │ ├─ Login.jsx
+│ │ │ ├─ Signup.jsx
+│ │ │ └─ MovieCylinder.jsx
+│ │ ├─ slider/
+│ │ │ └─ MovieCylinder.jsx
+│ │ ├─ inputfield.jsx
+│ ├─ hooks/
+│ │ └─ useDebounce.jsx
+│ ├─ App.jsx
+│ ├─ App.css
+│ ├─ index.js
+│ ├─ index.css
+│ ├─ main.jsx
+│ └─ supabase/
 ├─ .env
 ├─ .gitignore
 ├─ index.html
@@ -76,8 +73,7 @@ OZ_REACT_PJ/
 ├─ README.md
 ├─ tailwind.config.js
 ├─ vite.config.js
-
----
+```
 
 ## 🖼️ 스크린샷
 
