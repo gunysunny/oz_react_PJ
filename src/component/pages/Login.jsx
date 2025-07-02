@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import InputField from "../InputField";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../../supabase/auth/useAuth";
+import { useSupabaseAuth } from "../../../supabase/auth/index.js";
+import { useUserContext } from "../../context/UserContext";
 
 
 const validate = {
@@ -18,7 +19,17 @@ function Login() {
     const navigate = useNavigate();
 
     // ⭐ Supabase 로그인 함수 가져오기
-    const { login } = useAuth();
+    const { login } = useSupabaseAuth();
+    const { setUser } = useUserContext();
+    const { loginWithGoogle, loginWithKakao } = useSupabaseAuth();
+
+    const handleGoogleLogin = async () => {
+        await loginWithGoogle();
+    };
+
+    const handleKakaoLogin = async () => {
+        await loginWithKakao();
+    };
 
     // 배경 영화 백드롭 불러오기
     useEffect(() => {
@@ -65,8 +76,9 @@ function Login() {
                 const result = await login({ email: fields.email, password: fields.password });
                 if (result?.error) {
                     setSubmitError(result.error.message || "로그인 실패!");
-                } else {
-                    navigate("/"); // 로그인 성공시 메인으로 이동
+                } else if (result.user) {
+                    setUser(result.user);   // ← 이 줄 추가!
+                    navigate("/");  // 로그인 성공시 메인으로 이동
                 }
             } catch (err) {
                 setSubmitError("서버 연결 오류!");
@@ -126,6 +138,23 @@ function Login() {
                     >
                         회원가입으로 이동
                     </button>
+
+                    <div className="mt-4 flex flex-col gap-2">
+                        <button
+                            type="button"
+                            onClick={handleGoogleLogin}
+                            className="w-full bg-white text-black font-bold py-2 rounded shadow"
+                        >
+                            Google로 로그인
+                        </button>
+                        <button
+                            type="button"
+                            onClick={handleKakaoLogin}
+                            className="w-full bg-yellow-400 text-black font-bold py-2 rounded shadow"
+                        >
+                            Kakao로 로그인
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
