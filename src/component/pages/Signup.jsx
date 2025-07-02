@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import InputField from "../InputField";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../../supabase/auth/useAuth";
 import useDebounce from "../../hooks/useDebounce";
+import { useSupabaseAuth } from "../../../supabase/auth";
 
 const validate = {
     name: v => !/^[a-zA-Z0-9가-힣]{2,8}$/.test(v) ? "이름은 2~8자, 숫자/한글/영어만 사용!" : "",
@@ -19,7 +19,7 @@ function Signup() {
     const debouncedName = useDebounce(fields.name, 500);
     const [serverError, setServerError] = useState("");
     const navigate = useNavigate();
-    const { signUp } = useAuth(); // ⭐️ Supabase 회원가입 함수 가져오기
+    const { signUp } = useSupabaseAuth();
 
     useEffect(() => {
         if (fields.name === debouncedName) {
