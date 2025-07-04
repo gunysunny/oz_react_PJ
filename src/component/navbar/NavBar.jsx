@@ -59,51 +59,50 @@ function NavBar({ onSearch }) {
     return (
         <nav
             className={`
-                w-full text-white py-4 px-8 shadow fixed z-50 transition-colors duration-500
+                w-full text-white py-4 px-10 shadow fixed z-50 transition-colors duration-500
                 ${scrolled ? "bg-gradient-to-r from-[#191654] to-[#318d67] bg-opacity-90 backdrop-blur" : "bg-transparent"}
             `}
             style={{
                 boxShadow: scrolled ? "0 4px 20px 0 rgba(0,0,0,0.10)" : "none"
             }}
         >
-            <div className="max-w-5xl mx-auto flex items-center justify-between">
+            <div className="max-w-full mx-auto flex items-center justify-between">
                 {/* 왼쪽: 로고 */}
                 <span className="text-2xl font-bold">MSite</span>
                 {/* 오른쪽 */}
                 <div className="flex items-center gap-3 relative">
-                    {/* 검색 버튼 */}
+                    {/* 항상 렌더, width/opacity로 애니메이션 */}
+                    <input
+                        type="text"
+                        value={query}
+                        onChange={e => setQuery(e.target.value)}
+                        placeholder="검색어 입력"
+                        className={`
+                            bg-transparent px-2 py-1
+                            text-white text-sm focus:outline-none border-b-2 border-red-600
+                            transition-all duration-500
+                            mr-2
+                            ${showSearch ? "w-48 opacity-100" : "w-0 opacity-0 pointer-events-none"}
+                        `}
+                        style={{
+                            transition: "width 0.5s, opacity 0.5s, margin-right 0.5s",
+                            minWidth: 0,
+                            overflow: "hidden"
+                        }}
+                        autoFocus={showSearch}
+                    />
+
+                    {/* 검색버튼은 항상 오른쪽 */}
                     <button
-                        className="p-2 text-gray-300 hover:text-white transition"
+                        className="px-2 text-gray-300 hover:text-white transition"
                         onClick={() => setShowSearch(v => !v)}
+                        tabIndex={0}
+                        aria-label="검색"
                     >
                         <Search size={22} />
                     </button>
                     {/* 검색창 */}
-                    <div
-                        className={`
-                            overflow-hidden transition-all duration-500
-                            border-b-2
-                            ${showSearch
-                                ? "w-48 border-red-400"
-                                : "w-0 border-transparent"
-                            }
-                        `}
-                    >
-                        <input
-                            type="text"
-                            value={query}
-                            onChange={e => setQuery(e.target.value)}
-                            placeholder="검색어 입력"
-                            className={`
-                                bg-transparent px-2 py-1 w-full
-                                text-white text-sm
-                                focus:outline-none
-                                transition-all duration-500
-                                ${showSearch ? "opacity-100" : "opacity-0"}
-                            `}
-                            style={{ transition: "opacity 0.5s, width 0.5s" }}
-                        />
-                    </div>
+                    
 
                     {/* 로그인 전: 로그인/회원가입 메뉴 */}
                     {!user && (
@@ -147,7 +146,7 @@ function NavBar({ onSearch }) {
                     {user && (
                         <>
                             <button
-                                className="ml-2 p-2"
+                                className="ml-2 px-2"
                                 onClick={() => setShowUserMenu(!showUserMenu)}
                                 aria-label="유저 메뉴 열기"
                             >
@@ -161,11 +160,11 @@ function NavBar({ onSearch }) {
                                     <button
                                         className="py-2 px-4 hover:bg-gray-700 text-left text-white"
                                         onClick={() => {
-                                            navigate("/wishlist");
+                                            navigate("/mypage");
                                             setShowUserMenu(false);
                                         }}
                                     >
-                                        관심목록
+                                        마이페이지
                                     </button>
                                     <button
                                         className="py-2 px-4 hover:bg-gray-700 text-left text-white"
