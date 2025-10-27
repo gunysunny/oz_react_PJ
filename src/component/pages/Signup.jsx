@@ -5,7 +5,10 @@ import useDebounce from "../../hooks/useDebounce";
 import { useSupabaseAuth } from "../../../supabase/auth";
 
 const validate = {
-    name: v => !/^[a-zA-Z0-9가-힣]{2,8}$/.test(v) ? "이름은 2~8자, 숫자/한글/영어만 사용!" : "",
+    name: v => {
+        if (!v) return ""; // 비어있으면 에러 메시지 없음
+        return !/^[a-zA-Z0-9가-힣]{2,8}$/.test(v) ? "이름은 2~8자, 숫자/한글/영어만 사용!" : "";
+    },
     email: v => !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? "이메일 형식이 아닙니다." : "",
     password: v => !/^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{6,}$/.test(v) ? "비밀번호는 영어+숫자 6자 이상!" : "",
     passwordCheck: (v, pwd) => v !== pwd ? "비밀번호가 일치하지 않습니다." : "",
@@ -21,11 +24,7 @@ function Signup() {
     const navigate = useNavigate();
     const { signUp } = useSupabaseAuth();
 
-    useEffect(() => {
-        if (fields.name === debouncedName) {
-        setErrors(e => ({ ...e, name: validate.name(debouncedName) }));
-        }
-    }, [debouncedName]);
+    
 
     // 영화 백드롭 배경
     useEffect(() => {

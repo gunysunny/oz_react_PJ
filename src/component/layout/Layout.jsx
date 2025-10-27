@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import NavBar from "../navbar/NavBar";
 import { Outlet } from "react-router-dom";
 
+
 // 모든 페이지에서 NavBar + 각 페이지 콘텐츠를 동시에 보여주는 Layout 컴포넌트
 function Layout() {
     const [search, setSearch] = useState(""); // 검색 상태 Layout에서 관리

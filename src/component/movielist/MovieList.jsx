@@ -34,6 +34,8 @@ function MovieList() {
     // TMDB API 토큰 (.env에서 가져옴)
     const API_TOKEN = import.meta.env.VITE_TMDB_TOKEN;
 
+    const [wishlist, setWishlist] = useState([]);
+
     // --- [1] 검색 or 인기영화 1페이지 로딩 ---
     useEffect(() => {
         // 검색어가 있으면 -> 검색 API 호출
@@ -141,16 +143,28 @@ function MovieList() {
         statusMessage = <div className="text-center my-5">검색 중...</div>;
     }
 
+    const handleToggleWish = (movieId) => {
+        setWishlist(prev =>
+            prev.includes(movieId)
+            ? prev.filter(id => id !== movieId) // 이미 있으면 제거
+            : [...prev, movieId]                // 없으면 추가
+        );
+    };
+
     // --- [5] 렌더링 영역 ---
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-[#232f3e] text-white">
-            {/* 원통 캐러셀 영화 */}
+             {/* 검색어가 없을 때만 캐러셀 보이기 */}
+            {!debouncedSearch && (
             <MovieCylinder movies={cylinderMovies} />
-            {/* 그리드 영화 리스트 */}
-            <MovieGrid movies={movieList} />
-            {/* 입력/로딩 안내 메시지 */}
-            {statusMessage}
-            {/* 무한스크롤 트리거 div (IntersectionObserver target) */}
+            )}
+            {/* 그리드 영화 리스트는 항상 */}
+                <MovieGrid
+                    movies={movieList}
+                    wishlist={wishlist}
+                    onToggleWish={handleToggleWish}
+                />
+                {statusMessage}
             <div ref={loader} />
         </div>
     );

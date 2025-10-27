@@ -107,7 +107,7 @@ function MovieCylinder({ movies }) {
                         opacity = 1;
                         filter = "none";
                         zIdx = 10;
-                        transform = "skewY(-4deg) scale(1.48) rotateZ(-2deg)";
+                        transform = "skewY(10deg) scale(1.6) rotateZ(0deg)";
                     } else if (
                         i === (index - 1 + total) % total ||
                         i === (index + 1) % total
@@ -134,7 +134,7 @@ function MovieCylinder({ movies }) {
                     key={movie.id + "-skew-" + i}
                             style={{
                             position: "absolute",
-                            top: "27%", // 필요에 따라 조절
+                            top: "24%", // 필요에 따라 조절
                             left: i * (CARD_WIDTH + CARD_MARGIN),
                             width: CARD_WIDTH,
                             transition: "opacity 0.5s, filter 0.5s, transform 0.7s cubic-bezier(.4,0,.2,1)",

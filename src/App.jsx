@@ -7,6 +7,7 @@ import MovieDetail from "./component/moviedetail/MovieDetail";
 import Layout from "./component/layout/Layout";
 import Signup from "./component/pages/Signup";
 import Login from "./component/pages/Login";
+import MyPage from "./component/mypage/Mypage.jsx";
 
 function App() {
   const { getUserInfo } = useSupabaseAuth();
@@ -24,6 +25,7 @@ function App() {
         </Route>
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/mypage" element={<MyPage />} />
       </Routes>
     </BrowserRouter>
   );
