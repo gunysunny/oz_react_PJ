@@ -6,6 +6,7 @@ import { UserProvider } from "./context/UserContext"; // ← 추가!
 import App from './App.jsx'
 import { WishlistProvider } from './context/WishlistContext.jsx';
 
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <SupabaseProvider>
