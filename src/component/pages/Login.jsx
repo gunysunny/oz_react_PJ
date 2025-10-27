@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import InputField from "../InputField";
+import InputField from "../inputfield.jsx";
 import { useNavigate } from "react-router-dom";
 import { useSupabaseAuth } from "../../../supabase/auth/index.js";
 import { useUserContext } from "../../context/UserContext";
